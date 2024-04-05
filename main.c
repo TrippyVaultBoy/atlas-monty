@@ -3,12 +3,17 @@
  *
 */
 
+instruction_t instruction[] = {
+        {"push", push},
+        {"pall", pall}
+};
+
 int main()
 {
     FILE *file;
     char line[100];
     char *ops[10];
-    int i;
+    int line_number;
 
     file = fopen("bytecodes/00.m", "r");
     if (file == NULL)
@@ -20,9 +25,9 @@ int main()
     while (fgets(line, sizeof(line), file))
     {
         tokenize(ops, line);
-        for (i = 0; ops[i] != NULL; i++)
+        for (line_number = 0; ops[line_number] != NULL; line_number++)
         {
-            printf("%s\n", ops[i]);
+            printf("%s\n", ops[line_number]);
         }
     }
     fclose(file);

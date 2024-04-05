@@ -34,10 +34,7 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-instruction_t instruction[] = {
-        {"push", push},
-        {"pall", pall}
-};
+extern instruction_t instruction[];
 
 void tokenize(char *array[], char *command);
 void push(stack_t **stack, unsigned int line_number);
