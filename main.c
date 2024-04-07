@@ -72,12 +72,12 @@ int main(int argc, char **argv)
                     }
                     break;
                 }
-                // else
-                // {
-                //     printf("error: %s\n", ops[token]);
-                //     fprintf(stderr, "L%d: unknown instruction %s\n", token, ops[token]);
-                //     exit(EXIT_FAILURE);
-                // }
+                else
+                {
+                    printf("error: %s\n", ops[token]);
+                    fprintf(stderr, "L%d: unknown instruction %s\n", token, ops[token]);
+                    exit(EXIT_FAILURE);
+                }
             }
         }
     }
