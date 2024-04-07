@@ -74,7 +74,7 @@ int main(int argc, char **argv)
                 }
                 else
                 {
-                    fprintf(stderr, "L%d: unknown instruction %s\n", token, ops[token]);
+                    fprintf(stderr, "L4: unknown instruction %s\n", ops[token]);
                     exit(EXIT_FAILURE);
                 }
             }
