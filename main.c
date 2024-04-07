@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     FILE *file;
     char line[100];
     char *ops[10];
-    int line_number;
+    int token;
     int instruction_size;
     int i;
     
@@ -40,19 +40,20 @@ int main(int argc, char **argv)
         tokenize(ops, line);
 
         /* search through tokenized input */
-        for (line_number = 0; ops[line_number] != NULL; line_number++)
+        for (token = 0; ops[token] != NULL; token++)
         {
             /* search through instructions */
             for (i = 0; i < instruction_size; i++)
             {
+                char *arg = ops[token + 1];
+                arg = strtok(arg, "$");
+
                 /* compare token to each instruction */
-                if (strcmp(ops[line_number], instruction[i].opcode) == 0)
+                if (strcmp(ops[token], instruction[i].opcode) == 0)
                 {
                     /* check if instruction is push */
-                    if (strcmp(ops[line_number], "push") == 0)
+                    if (strcmp(ops[token], "push") == 0)
                     {
-                        char *arg = ops[line_number + 1];
-                        arg = strtok(arg, "$");
 
                         /* check if the arg after push is a digit */
                         if (!isdigit(*arg))
@@ -62,14 +63,21 @@ int main(int argc, char **argv)
                         }
 
                         instruction[i].f(&stack, atoi(arg));
-                        line_number++;
+                        token++;
                     }
                     else
                     {
-                        instruction[i].f(&stack, line_number);
+                        printf("else: %s\n", ops[token]);
+                        instruction[i].f(&stack, token);
                     }
                     break;
                 }
+                // else
+                // {
+                //     printf("error: %s\n", ops[token]);
+                //     fprintf(stderr, "L%d: unknown instruction %s\n", token, ops[token]);
+                //     exit(EXIT_FAILURE);
+                // }
             }
         }
     }
