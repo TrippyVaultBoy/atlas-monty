@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     int instruction_size;
     int i;
     
-    instruction_size = 2;
+    instruction_size = 3;
     i = 0;
 
     if (argc != 2)
@@ -38,15 +38,30 @@ int main(int argc, char **argv)
     while (fgets(line, sizeof(line), file))
     {
         tokenize(ops, line);
+
+        /* search through tokenized input */
         for (line_number = 0; ops[line_number] != NULL; line_number++)
         {
-            for (i = 0; i <= instruction_size; i++)
+            /* search through instructions */
+            for (i = 0; i < instruction_size; i++)
             {
+                /* compare token to each instruction */
                 if (strcmp(ops[line_number], instruction[i].opcode) == 0)
                 {
+                    /* check if instruction is push */
                     if (strcmp(ops[line_number], "push") == 0)
                     {
                         char *arg = ops[line_number + 1];
+                        arg = strtok(arg, "$");
+                        printf("arg: %s\n", arg);
+
+                        /* check if the arg after push is a digit */
+                        if (!isdigit(*arg))
+                        {
+                            fprintf(stderr, "L%d: usage: push integer\n", line_number);
+                            exit(EXIT_FAILURE);
+                        }
+
                         instruction[i].f(&stack, atoi(arg));
                         line_number++;
                     }
