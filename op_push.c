@@ -6,12 +6,21 @@
 
 void push(stack_t **stack, unsigned int line_number)
 {
-    int i;
-
-    i = 0;
-    printf("push executed: push %i\n", line_number);
-    if (*stack == NULL)
+    stack_t *new_node = malloc(sizeof(stack_t));
+    if (new_node == NULL)
     {
-        i = i + line_number;
+        printf("Memory allocation failed\n");
+        exit(EXIT_FAILURE);
     }
+
+    new_node->n = line_number;
+
+    new_node->prev = NULL;
+    new_node->next = *stack;
+    if (*stack != NULL)
+    {
+        (*stack)->prev = new_node;
+    }
+
+    *stack = new_node;
 }

@@ -5,6 +5,7 @@
 
 instruction_t instruction[] = {
         {"push", push},
+        {"pall", pall},
         {"pall$", pall}
 };
 
@@ -18,7 +19,7 @@ int main(int argc, char **argv)
     int instruction_size;
     int i;
     
-    instruction_size = 1;
+    instruction_size = 2;
     i = 0;
 
     if (argc != 2)
@@ -36,12 +37,10 @@ int main(int argc, char **argv)
 
     while (fgets(line, sizeof(line), file))
     {
-        printf("Input line: %s\n", line);
-
         tokenize(ops, line);
         for (line_number = 0; ops[line_number] != NULL; line_number++)
         {
-            for (i = 0; i < instruction_size; i++)
+            for (i = 0; i <= instruction_size; i++)
             {
                 if (strcmp(ops[line_number], instruction[i].opcode) == 0)
                 {
