@@ -39,5 +39,6 @@ extern instruction_t instruction[];
 void tokenize(char *array[], char *command);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void op_decode(char *ops[], instruction_t instruction[], int instruction_size, stack_t **stack, unsigned int line_number);
 
 #endif

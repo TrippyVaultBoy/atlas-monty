@@ -4,11 +4,11 @@
  *
 */
 
-void op_decode(char *ops[], instruction_t instruction[], stack_t **stack, unsigned int line_number)
+void op_decode(char *ops[], instruction_t instruction[], int instruction_size, stack_t **stack, unsigned int line_number)
 {
     int i;
 
-    for (i = 0; i < sizeof(instruction)/sizeof(instruction[0]); i++)
+    for (i = 0; i < instruction_size; i++)
     {
         if (strcmp(ops[0], instruction[i].opcode) == 0)
         {
@@ -17,6 +17,5 @@ void op_decode(char *ops[], instruction_t instruction[], stack_t **stack, unsign
         }
     }
 
-    printf("opcode not found");
-    return;
+    printf("opcode not found\n");
 }
