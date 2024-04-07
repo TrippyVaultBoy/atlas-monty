@@ -19,10 +19,12 @@ int main(int argc, char **argv)
     int instruction_size;
     int instruct_num;
     int line_num;
+    int found_op;
     
     instruction_size = 3;
     instruct_num = 0;
     line_num = 0;
+    found_op = 0;
 
     if (argc != 2)
     {
@@ -48,10 +50,11 @@ int main(int argc, char **argv)
             /* search through instructions */
             for (instruct_num = 0; instruct_num < instruction_size; instruct_num++)
             {
-                printf("Token: %s Instruction: %s\n", ops[token], instruction[instruct_num].opcode);
+                // printf("Token: %s Instruction: %s\n", ops[token], instruction[instruct_num].opcode);
                 /* compare token to each instruction */
                 if (strcmp(ops[token], instruction[instruct_num].opcode) == 0)
                 {
+                    found_op = 1;
                     /* check if instruction is push */
                     if (strcmp(ops[token], "push") == 0)
                     {
@@ -74,9 +77,10 @@ int main(int argc, char **argv)
                     }
                     break;
                 }
-                else if (strcmp(ops[token], instruction[instruct_num].opcode) != 0 && )
+                else if (found_op == 0)
                 {
                     fprintf(stderr, "L%d: unknown instruction %s\n", line_num, ops[instruct_num]);
+                    exit(EXIT_FAILURE);
                 }
             }
         }
