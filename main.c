@@ -53,7 +53,6 @@ int main(int argc, char **argv)
                     {
                         char *arg = ops[line_number + 1];
                         arg = strtok(arg, "$");
-                        printf("arg: %s\n", arg);
 
                         /* check if the arg after push is a digit */
                         if (!isdigit(*arg))
