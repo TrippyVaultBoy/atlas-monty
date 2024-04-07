@@ -16,6 +16,4 @@ void op_decode(char *ops[], instruction_t instruction[], int instruction_size, s
             return;
         }
     }
-
-    printf("opcode not found\n");
 }

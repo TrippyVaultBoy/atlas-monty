@@ -34,8 +34,7 @@ int main()
         tokenize(ops, line);
         for (line_number = 0; ops[line_number] != NULL; line_number++)
         {
-            printf("line token: %s\n", ops[line_number]);
-            op_decode(ops, instruction, instruction_size, &stack, line_number);
+            op_decode(&ops[line_number], instruction, instruction_size, &stack, line_number);
         }
     }
 
