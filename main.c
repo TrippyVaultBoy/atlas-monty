@@ -15,12 +15,14 @@ int main(int argc, char **argv)
     FILE *file;
     char line[100];
     char *ops[10];
-    int line_number;
+    int token;
     int instruction_size;
-    int i;
+    int instruct_num;
+    int line_num;
     
     instruction_size = 3;
-    i = 0;
+    instruct_num = 0;
+    line_num = 0;
 
     if (argc != 2)
     {
@@ -37,38 +39,44 @@ int main(int argc, char **argv)
 
     while (fgets(line, sizeof(line), file))
     {
+        line_num++;
         tokenize(ops, line);
 
         /* search through tokenized input */
-        for (line_number = 0; ops[line_number] != NULL; line_number++)
+        for (token = 0; ops[token] != NULL; token++)
         {
             /* search through instructions */
-            for (i = 0; i < instruction_size; i++)
+            for (instruct_num = 0; instruct_num < instruction_size; instruct_num++)
             {
+                printf("Token: %s Instruction: %s\n", ops[token], instruction[instruct_num].opcode);
                 /* compare token to each instruction */
-                if (strcmp(ops[line_number], instruction[i].opcode) == 0)
+                if (strcmp(ops[token], instruction[instruct_num].opcode) == 0)
                 {
                     /* check if instruction is push */
-                    if (strcmp(ops[line_number], "push") == 0)
+                    if (strcmp(ops[token], "push") == 0)
                     {
-                        char *arg = ops[line_number + 1];
+                        char *arg = ops[token + 1];
                         arg = strtok(arg, "$");
 
                         /* check if the arg after push is a digit */
                         if (!isdigit(*arg))
                         {
-                            fprintf(stderr, "L4: usage: push integer\n");
+                            fprintf(stderr, "L%d: usage: push integer\n", line_num);
                             exit(EXIT_FAILURE);
                         }
 
-                        instruction[i].f(&stack, atoi(arg));
-                        line_number++;
+                        instruction[instruct_num].f(&stack, atoi(arg));
+                        token++;
                     }
                     else
                     {
-                        instruction[i].f(&stack, line_number);
+                        instruction[instruct_num].f(&stack, token);
                     }
                     break;
+                }
+                else if (strcmp(ops[token], instruction[instruct_num].opcode) != 0 && )
+                {
+                    fprintf(stderr, "L%d: unknown instruction %s\n", line_num, ops[instruct_num]);
                 }
             }
         }
