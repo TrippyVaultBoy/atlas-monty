@@ -8,7 +8,7 @@ instruction_t instruction[] = {
         {"pall$", pall}
 };
 
-int main()
+int main(int argc, char **argv)
 {
     stack_t *stack = NULL;
     FILE *file;
@@ -21,7 +21,13 @@ int main()
     instruction_size = 1;
     i = 0;
 
-    file = fopen("bytecodes/00.m", "r");
+    if (argc != 2)
+    {
+        printf("wrong argument count");
+        return (1);
+    }
+
+    file = fopen(argv[1], "r");
     if (file == NULL)
     {
         perror("Error opening file");
