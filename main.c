@@ -10,15 +10,16 @@ instruction_t instruction[] = {
 
 int main()
 {
-    stack_t *stack;
+    stack_t *stack = NULL;
     FILE *file;
     char line[100];
     char *ops[10];
     int line_number;
     int instruction_size;
+    int i;
     
-    stack = NULL;
     instruction_size = 1;
+    i = 0;
 
     file = fopen("bytecodes/00.m", "r");
     if (file == NULL)
@@ -34,7 +35,13 @@ int main()
         tokenize(ops, line);
         for (line_number = 0; ops[line_number] != NULL; line_number++)
         {
-            op_decode(&ops[line_number], instruction, instruction_size, &stack, line_number);
+            for (i = 0; i < instruction_size; i++)
+            {
+                if (strcmp(ops[line_number], instruction[i].opcode) == 0)
+                {
+                    instruction[i].f(&stack, line_number);
+                }
+            }
         }
     }
 
