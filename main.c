@@ -77,13 +77,14 @@ int main(int argc, char **argv)
                     }
                     break;
                 }
-                else if (found_op == 0)
-                {
-                    fprintf(stderr, "L%d: unknown instruction %s\n", line_num, ops[instruct_num]);
-                    exit(EXIT_FAILURE);
-                }
+            }
+            if (!found_op)
+            {
+                fprintf(stderr, "L%d: unknown instruction %s\n", line_num, ops[0]);
+                exit(EXIT_FAILURE);
             }
         }
+        found_op = 0;
     }
 
     fclose(file);
