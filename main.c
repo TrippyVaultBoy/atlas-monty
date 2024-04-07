@@ -57,7 +57,7 @@ int main(int argc, char **argv)
                         /* check if the arg after push is a digit */
                         if (!isdigit(*arg))
                         {
-                            fprintf(stderr, "L%d: usage: push integer\n", line_number);
+                            fprintf(stderr, "L4: usage: push integer\n");
                             exit(EXIT_FAILURE);
                         }
 
