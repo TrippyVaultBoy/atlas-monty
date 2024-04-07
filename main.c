@@ -5,7 +5,7 @@
 
 instruction_t instruction[] = {
         {"push", push},
-        {"pall", pall}
+        {"pall$", pall}
 };
 
 int main()
@@ -39,7 +39,17 @@ int main()
             {
                 if (strcmp(ops[line_number], instruction[i].opcode) == 0)
                 {
-                    instruction[i].f(&stack, line_number);
+                    if (strcmp(ops[line_number], "push") == 0)
+                    {
+                        char *arg = ops[line_number + 1];
+                        instruction[i].f(&stack, atoi(arg));
+                        line_number++;
+                    }
+                    else
+                    {
+                        instruction[i].f(&stack, line_number);
+                    }
+                    break;
                 }
             }
         }
