@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     FILE *file;
     char line[100];
     char *ops[10];
-    int token;
+    int line_number;
     int instruction_size;
     int i;
     
@@ -40,20 +40,19 @@ int main(int argc, char **argv)
         tokenize(ops, line);
 
         /* search through tokenized input */
-        for (token = 0; ops[token] != NULL; token++)
+        for (line_number = 0; ops[line_number] != NULL; line_number++)
         {
             /* search through instructions */
             for (i = 0; i < instruction_size; i++)
             {
-                char *arg = ops[token + 1];
-                arg = strtok(arg, "$");
-
                 /* compare token to each instruction */
-                if (strcmp(ops[token], instruction[i].opcode) == 0)
+                if (strcmp(ops[line_number], instruction[i].opcode) == 0)
                 {
                     /* check if instruction is push */
-                    if (strcmp(ops[token], "push") == 0)
+                    if (strcmp(ops[line_number], "push") == 0)
                     {
+                        char *arg = ops[line_number + 1];
+                        arg = strtok(arg, "$");
 
                         /* check if the arg after push is a digit */
                         if (!isdigit(*arg))
@@ -63,19 +62,13 @@ int main(int argc, char **argv)
                         }
 
                         instruction[i].f(&stack, atoi(arg));
-                        token++;
+                        line_number++;
                     }
                     else
                     {
-                        printf("else: %s\n", ops[token]);
-                        instruction[i].f(&stack, token);
+                        instruction[i].f(&stack, line_number);
                     }
                     break;
-                }
-                else
-                {
-                    fprintf(stderr, "L4: unknown instruction %s\n", ops[token]);
-                    exit(EXIT_FAILURE);
                 }
             }
         }
