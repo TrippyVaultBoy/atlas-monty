@@ -1,5 +1,4 @@
-push 1$
-push 2$
-push 3$
-pall$
-pal$
+push 1
+push a2
+push 3
+pall

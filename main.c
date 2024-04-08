@@ -20,6 +20,7 @@ int main(int argc, char **argv)
     int instruct_num;
     int line_num;
     int found_op;
+    int j;
     
     instruction_size = 3;
     instruct_num = 0;
@@ -59,13 +60,16 @@ int main(int argc, char **argv)
                     if (strcmp(ops[token], "push") == 0)
                     {
                         char *arg = ops[token + 1];
-                        arg = strtok(arg, "$");
+                        arg = strtok(arg, "\n");
 
                         /* check if the arg after push is a digit */
-                        if (!isdigit(*arg))
+                        for (j = 0; j < (signed int)strlen(arg); j++)
                         {
-                            fprintf(stderr, "L%d: usage: push integer\n", line_num);
-                            exit(EXIT_FAILURE);
+                            if (!isdigit(arg[j]))
+                            {
+                                fprintf(stderr, "L%d: usage: push integer\n", line_num);
+                                exit(EXIT_FAILURE); 
+                            }
                         }
 
                         instruction[instruct_num].f(&stack, atoi(arg));
