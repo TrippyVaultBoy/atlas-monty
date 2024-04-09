@@ -50,7 +50,7 @@ int main(int argc, char **argv)
             /* search through instructions */
             for (instruct_num = 0; instruct_num < instruction_size; instruct_num++)
             {
-                printf("Token: %s Instruction: %s\n", ops[token], instruction[instruct_num].opcode);
+                // printf("Token: %s Instruction: %s\n", ops[token], instruction[instruct_num].opcode);
                 /* compare token to each instruction */
                 if (strcmp(ops[token], instruction[instruct_num].opcode) == 0)
                 {
