@@ -84,7 +84,6 @@ int main(int argc, char **argv)
                         }
 
                         instruction[instruct_num].f(&stack, atoi(arg));
-                        token++;
                     }
                     else
                     {
