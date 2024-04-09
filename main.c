@@ -46,7 +46,7 @@ int main(int argc, char **argv)
         tokenize(ops, line);
 
         /* search through tokenized input */
-        for (token = 0; ops[token] != NULL; token++)
+        for (token = 0; ops[token] != NULL && ops[token + 1] != NULL; token++)
         {
             /* search through instructions */
             for (instruct_num = 0; instruct_num < instruction_size; instruct_num++)
@@ -59,8 +59,19 @@ int main(int argc, char **argv)
                     /* check if instruction is push */
                     if (strcmp(ops[token], "push") == 0)
                     {
+                        if (ops[token + 1] == NULL)
+                        {
+                            fprintf(stderr, "L%d: usage: push integer\n", line_num);
+                            exit(EXIT_FAILURE);  
+                        }
+
                         char *arg = ops[token + 1];
                         arg = strtok(arg, "\n");
+                        if (arg == NULL)
+                        {
+                            fprintf(stderr, "L%d: usage: push integer\n", line_num);
+                            exit(EXIT_FAILURE); 
+                        }
 
                         /* check if the arg after push is a digit */
                         for (j = 0; j < (signed int)strlen(arg); j++)
