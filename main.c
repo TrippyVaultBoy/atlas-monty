@@ -61,7 +61,7 @@ int main(int argc, char **argv)
                     {
                         if (ops[token + 1] == NULL)
                         {
-                            fprintf(stderr, "L%d: usage: push integer\n", line_num);
+                            fprintf(stderr, "L%d: usage: push integer 1\n", line_num);
                             exit(EXIT_FAILURE);  
                         }
 
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
                         arg = strtok(arg, "\n");
                         if (arg == NULL)
                         {
-                            fprintf(stderr, "L%d: usage: push integer\n", line_num);
+                            fprintf(stderr, "L%d: usage: push integer 2\n", line_num);
                             exit(EXIT_FAILURE); 
                         }
 
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
                         {
                             if (!isdigit(arg[j]))
                             {
-                                fprintf(stderr, "L%d: usage: push integer\n", line_num);
+                                fprintf(stderr, "L%d: usage: push integer 3\n", line_num);
                                 exit(EXIT_FAILURE); 
                             }
                         }
