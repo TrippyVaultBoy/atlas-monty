@@ -25,7 +25,7 @@ int main(int argc, char **argv)
     
     instruction_size = 4;
     instruct_num = 0;
-    line_num = 0;
+    line_num = 1;
     found_op = 0;
 
     if (argc != 2)
@@ -44,6 +44,7 @@ int main(int argc, char **argv)
     while (fgets(line, sizeof(line), file))
     {
         tokenize(ops, line);
+        printf("Line %d: %s\n", line_num, line);
 
         /* search through tokenized input */
         for (token = 0; ops[token] != NULL; token++)
@@ -88,7 +89,7 @@ int main(int argc, char **argv)
                     }
                     else
                     {
-                        instruction[instruct_num].f(&stack, token);
+                        instruction[instruct_num].f(&stack, line_num - 1);
                     }
                     break;
                 }
@@ -100,6 +101,7 @@ int main(int argc, char **argv)
             }
         }
         found_op = 0;
+        line_num = line_num + 1;
     }
 
     fclose(file);
