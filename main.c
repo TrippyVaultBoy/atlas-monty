@@ -8,7 +8,8 @@ instruction_t instruction[] = {
         {"pall", pall},
         {"pint", pint},
         {"pop", pop},
-        {"nop", nop}
+        {"nop", nop},
+        {NULL, NULL}
 };
 
 int main(int argc, char **argv)
@@ -18,13 +19,11 @@ int main(int argc, char **argv)
     char line[100];
     char *ops[10];
     int token;
-    int instruction_size;
     int instruct_num;
     int line_num;
     int found_op;
     int j;
     
-    instruction_size = 5;
     instruct_num = 0;
     line_num = 1;
     found_op = 0;
@@ -50,7 +49,7 @@ int main(int argc, char **argv)
         for (token = 0; ops[token] != NULL; token++)
         {
             /* search through instructions */
-            for (instruct_num = 0; instruct_num < instruction_size; instruct_num++)
+            for (instruct_num = 0; instruction[instruct_num].opcode != NULL; instruct_num++)
             {
                 // printf("Token: %s Instruction: %s\n", ops[token], instruction[instruct_num].opcode);
                 /* compare token to each instruction */

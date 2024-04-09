@@ -1,4 +1,4 @@
 push 1 
-pint
-pop
-pint
+push 2 
+push 3
+pall
