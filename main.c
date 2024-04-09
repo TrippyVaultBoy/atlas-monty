@@ -45,18 +45,18 @@ int main(int argc, char **argv)
         tokenize(ops, line);
 
         /* search through tokenized input */
-        for (token = 0; ops[token] != NULL && ops[token + 1] != NULL; token++)
+        for (token = 0; ops[token] != NULL; token++)
         {
             /* search through instructions */
             for (instruct_num = 0; instruct_num < instruction_size; instruct_num++)
             {
-                // printf("Token: %s Instruction: %s\n", ops[token], instruction[instruct_num].opcode);
+                printf("Token: %s Instruction: %s\n", ops[token], instruction[instruct_num].opcode);
                 /* compare token to each instruction */
                 if (strcmp(ops[token], instruction[instruct_num].opcode) == 0)
                 {
                     found_op = 1;
                     /* check if instruction is push */
-                    if (strcmp(ops[token], "push") == 0)
+                    if (strcmp(ops[token], "push") == 0 && ops[token + 1] != NULL)
                     {
                         if (ops[token + 1] == NULL)
                         {
