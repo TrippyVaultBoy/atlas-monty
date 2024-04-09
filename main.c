@@ -6,6 +6,7 @@
 instruction_t instruction[] = {
         {"push", push},
         {"pall", pall},
+        {"pint", pint}
 };
 
 int main(int argc, char **argv)
@@ -21,7 +22,7 @@ int main(int argc, char **argv)
     int found_op;
     int j;
     
-    instruction_size = 2;
+    instruction_size = 3;
     instruct_num = 0;
     line_num = 0;
     found_op = 0;
