@@ -44,7 +44,6 @@ int main(int argc, char **argv)
     while (fgets(line, sizeof(line), file))
     {
         tokenize(ops, line);
-        printf("Line %d: %s\n", line_num, line);
 
         /* search through tokenized input */
         for (token = 0; ops[token] != NULL; token++)
