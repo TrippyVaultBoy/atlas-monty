@@ -6,7 +6,8 @@
 instruction_t instruction[] = {
         {"push", push},
         {"pall", pall},
-        {"pint", pint}
+        {"pint", pint},
+        {"pop", pop}
 };
 
 int main(int argc, char **argv)
@@ -22,7 +23,7 @@ int main(int argc, char **argv)
     int found_op;
     int j;
     
-    instruction_size = 3;
+    instruction_size = 4;
     instruct_num = 0;
     line_num = 0;
     found_op = 0;
@@ -43,7 +44,6 @@ int main(int argc, char **argv)
     while (fgets(line, sizeof(line), file))
     {
         tokenize(ops, line);
-        line_num++;
 
         /* search through tokenized input */
         for (token = 0; ops[token] != NULL; token++)
